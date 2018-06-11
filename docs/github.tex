@@ -14,12 +14,12 @@
 \usepackage{hyperref}
 \defaultfontfeatures{Ligatures=TeX}
 
-\setCJKmainfont{Noto Serif CJK JP}
+\setCJKmainfont[BoldFont=Noto Sans CJK JP Bold]{Noto Serif CJK JP}
 \setCJKsansfont{Noto Sans CJK JP}
 \setCJKmonofont{Noto Sans Mono CJK JP}
 
 
-\setmainfont{Noto Serif CJK JP}
+\setmainfont[BoldFont=Noto Sans CJK JP Bold]{Noto Serif CJK JP}
 \setsansfont{Noto Sans CJK JP}
 \setmonofont{Inconsolata}
 
@@ -110,7 +110,7 @@ The key's randomart image is:
 GitHub にログインして右上にあるアイコンから Settings を選びます。
 左のメニューから SSH keys を選びます。
 そこで Add SSH key を選び、Title  とKey (公開鍵)を入力します。
-Title はなんでもよいです(ひょっとしたら空でもよいかも)。公開鍵として \texttt{id\_rsa.pub} の内容を入力します。
+Title はなんでもよいです(例えば「西7演習室」など)。公開鍵として \texttt{id\_rsa.pub} の内容を入力します。
 ホームディレクトリで
 \begin{verbatim}
 cat .ssh/id_rsa.pub
