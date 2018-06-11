@@ -1,0 +1,363 @@
+\documentclass[a4paper,11pt, article]{memoir}
+
+%\setstocksize{237.8mm}{420.5mm}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\setlrmarginsandblock{20mm}{20mm}{*}
+\setulmarginsandblock{18mm}{30mm}{*}
+\setheadfoot{13.6pt}{15mm}
+\setheaderspaces{*}{0mm}{*}
+\checkandfixthelayout[fixed]
+%\pagestyle{empty}
+
+\usepackage{xeCJK}
+\usepackage{url}
+\usepackage{hyperref}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setCJKmainfont[BoldFont= Noto Sans CJK JP Bold]{Noto Serif CJK JP}
+\setCJKsansfont{Noto Sans CJK JP}
+\setCJKmonofont{Noto Sans Mono CJK JP}
+
+
+\setmainfont[BoldFont= Noto Sans CJK JP Bold]{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{Inconsolata}
+
+\counterwithout{section}{chapter}
+
+\setsecnumdepth{subsection}
+%\maxsecnumdepth{section}
+
+\usepackage{listings}
+
+\title{Git の使い方}
+\author{森~立平}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent
+目標
+\begin{itemize}
+\item バージョン管理システム Git を使えるようになる。
+%\item Scala の2通りの実行方法を経験する。
+%\item Scala の ビルドツール sbt を触る。
+\end{itemize}
+
+%\noindent
+%今日のワークフロー
+%\begin{enumerate}
+%\item この原稿の1, 2章を読む。
+%\item 3章に書いてある課題をやる。
+%\item 4, 5章を読む。
+%\item 6章に書いてある課題をやる。
+%\end{enumerate}
+
+\section{バージョン管理システムとは}
+バージョン管理システムはある程度の規模のプログラム(もっと一般にテキストファイル)を書く上では必須のツールです。
+今までプログラムを書いてきて、既にある程度動作するプログラムに大きな変更を加えたくなったことがあると思います。
+そのような場合に一旦別ファイルにコピーしてからプログラムを編集した経験があるかもしれません。
+バージョン管理システムを使えばそのようなことをする必要はありません。過去のバージョンをいつでも見ることができます。
+またチームでプログラムの開発をする場合には一つのファイルを複数の開発者が書き換えた場合に可能な限り自動的にマージをしてくれます。
+この授業では最近のバージョン管理システムの中でも最もよく使用されている Git を使います。
+以下 Git の最小限の説明をしますが、より詳しく知りたい人はPro Git \url{https://progit.org/} を読むとよいでしょう。
+
+\section{Git の基本的な使い方}
+\subsection{初期設定}
+ホームディレクトリに \texttt{.gitconfig} というファイルを作って以下のように書いてください。
+\begin{verbatim}
+[user]
+        name = 名前
+        email = メールアドレス
+[push]
+        default = simple
+\end{verbatim}
+ここで \texttt{名前} はあなたの名前の英語表記で置き換えてください。
+また \texttt{メールアドレス} はあなたのメールアドレスで置き換えてください。
+
+\subsection{リポジトリを作る(演習では使わないが知っておいた方がよい)}
+Git はリポジトリという単位でファイル群を管理します。
+まず Git で管理したいディレクトリに移動します。
+既に作成したファイルがあっても、空のディレクトリであっても構いません。
+そして
+\begin{verbatim}
+git init
+\end{verbatim}
+とコマンドを実行します。
+これで現在のディレクトリ以下を Git で管理できるようになりました。
+この Git で管理されているディレクトリのことをリポジトリと呼びます。
+このディレクトリには \texttt{.git} というディレクトリが作成されています(\texttt{ls -A} で確認できます)。
+このディレクトリは Git が情報を保存するためのディレクトリであり、設定ファイルである \texttt{.git/config} 以外を編集することはありません。
+
+\subsection{管理するファイルを追加する}
+リポジトリを作っただけでは Git はどのファイルを管理すればよいのか分かりません。
+\begin{verbatim}
+git add ファイル名
+\end{verbatim}
+というコマンドで Git で管理したいファイルを指定します。
+ここで \texttt{ファイル名}は Git で管理したいファイル名に置き換えてください。
+たとえば \texttt{hello.scala} というファイルを Git で管理したいときは
+\begin{verbatim}
+git add hello.scala
+\end{verbatim}
+としてください。これで Git は 「\texttt{hello.scala} というファイルの変更を管理すればよいのだ」
+ということを理解します。しかしまだ Git は\texttt{hello.scala} の内容を読んではいません。
+次に紹介する \texttt{git commit} でファイルの内容を記録する必要があります。
+また一つのリポジトリ内で複数のファイルを追加しても構いません。
+
+
+\subsection{管理しているファイルの変更を記録する}
+\texttt{add} したファイルを Git で記録したいときは
+\begin{verbatim}
+git commit -m "コメント"
+\end{verbatim}
+とします。
+ここで \texttt{コメント} は「このファイルの変更に対するコメント」で置き換えてください。
+自分一人しか使用しないリポジトリの場合はこのコメントはなんでもよいです。
+
+リポジトリ内で最終コミット以降に更新された全てのファイルの変更を記録したいときは
+\begin{verbatim}
+git commit -a -m "コメント"
+\end{verbatim}
+としてください。
+
+コミット直後に Git が記録している最新のファイルの状態をリビジョンと呼び、それぞれのコミットに「リビジョン名」が割り当てられます(後述)。
+
+
+\subsection{その他のコマンド}
+過去のコミットログを見たい場合は
+\begin{verbatim}
+git log
+\end{verbatim}
+としてください。
+
+最終コミットと現在のファイルとの差分を見るには
+\begin{verbatim}
+git diff
+\end{verbatim}
+としてください。
+特定のリビジョンと現在のファイルとの差分を見たい場合は
+\begin{verbatim}
+git diff リビジョン名
+\end{verbatim}
+としてください。
+ここで \texttt{リビジョン名}は比較したいリビジョンのリビジョン名で置き換えてください。
+ここでリビジョン名とは \texttt{git log} で該当するコミットに関するログ
+\begin{verbatim}
+commit 8ac50947b3f75158f457335c65f3ff93e687c045
+Author: Ryuhei Mori <mori@is.titech.ac.jp>
+Date:   Sat Sep 19 10:33:44 2015 +0900
+
+    comment
+\end{verbatim}
+の中で \texttt{8ac50947b3f75158f457335c65f3ff93e687c045} にあたる部分です。
+これはとても長いですが最初の数文字を指定すれば十分です。
+例えばこの例の場合は
+\begin{verbatim}
+git diff 8ac509
+\end{verbatim}
+としてください。
+
+特定のリビジョン同士の差分を見るには
+\begin{verbatim}
+git diff リビジョン名1 リビジョン名2
+\end{verbatim}
+としてください。
+
+コマンドのヘルプを見たいときは
+\begin{verbatim}
+git help gitコマンド名
+\end{verbatim}
+としてください。
+ここで \texttt{gitコマンド名} は git のコマンド名(init, add, commit, log, diff など)で置き換えてください。
+また、ここで紹介したコマンド以外にもたくさんの gitコマンドがあります。
+
+\if0
+\subsection{リポジトリの clone}
+上の使用方法では自分でリポジトリを作りましたが、既に存在するリポジトリを自分の環境にコピーすることができます。
+\begin{verbatim}
+git clone gitリポジトリパス
+\end{verbatim}
+とすると現在のディレクトリに新しいディレクトリが作成されます。
+この新しいディレクトリは \texttt{gitリポジトリパス}で指定したリポジトリのコピーです。
+リポジトリの指定方法については後述します。
+
+Clone で作成されたリポジトリの場合、\texttt{.git/config} に clone 元のリモートリポジトリのパスが書かれているはずです。
+Clone したリポジトリに対して書き込み権限があれば変更をリモートリポジトリに反映することができます。
+\begin{verbatim}
+git push
+\end{verbatim}
+としてください。
+
+リモートリポジトリが更新された場合にその変更を自分のリポジトリに取り込むには
+\begin{verbatim}
+git pull
+\end{verbatim}
+とします。ただし、自分のリポジトリとリモートリポジトリとで同じファイルの同じ部分を編集していた場合には
+コンフリクトを自力で解消する必要があります。
+\fi
+
+%この \texttt{git push}, \texttt{git pull} についてはこの授業で使用するかどうか検討中です。
+
+\if0
+\section{Scala のプログラムファイルをコンパイルする}
+
+\section{Scala用のビルドツール sbt を利用する}
+\fi
+
+\section{やってみよう}
+Git の リポジトリを作って一通りコマンドを使ってください。
+一例としては、リポジトリを作る$\rightarrow$なにかテキストファイルを作る$\rightarrow$追加する$\rightarrow$コミットする$\rightarrow$ファイルを編集する$\rightarrow$差分を見る$\rightarrow$変更をコミットする$\rightarrow$ログを見る
+$\rightarrow$ファイルを編集する$\rightarrow$ 最初のリビジョンとの差分を見る。
+%\item 脇田先生の Git リポジトリから clone する。
+%\begin{verbatim}
+%git clone https://github.com/titech-is-cs115/Alogirhtms-Datastructures.git
+%\end{verbatim}
+%というコマンドを実行してください。
+%このリポジトリは GitHub というサービスを利用して公開しています。
+%ウェブブラウザから \texttt{https://github.com/\allowbreak titech-is-cs115/lecture} にアクセスすることでもリポジトリの内容を見ることができます。
+%\item 以降は \url{https://titech-is-cs115.github.io/lecture/assignments/lx00a.html} を参照。
+%\item Scalaプログラムをコンパイルしてから実行する。
+%\item sbtコマンドを一通り使う。
+
+\section{Git の \texttt{clone}, \texttt{push}, \texttt{pull} について}
+%Git の基本的な使い方については前回の資料を見てください。
+%より詳しい説明は公式のドキュメント \url{https://git-scm.com/} にあります 。
+Git を使って複数人で共同開発するには\texttt{clone}, \texttt{push}, \texttt{pull} コマンドを使用する必要があります。
+この演習の授業でもこれらのコマンドを使って課題の配布、提出をおこないます。
+この章で使う用語の説明をします。
+\begin{itemize}
+\item ワーキングディレクトリ: 現在作業しているディレクトリで Git で管理されているもの。ディレクトリ \texttt{.git/} を直下に含むディレクトリ。
+\item ローカルリポジトリ: ワーキングディレクトリに対応するリポジトリ。実体としては \texttt{.git/} の中身。
+\item リモートリポジトリ: インターネット上あるいはその他ネットワーク上にあるリポジトリ。この授業では GitHub上のリポジトリを指す。
+\end{itemize}
+
+\subsection{リモートリポジトリを clone する}
+リモートリポジトリを clone してローカルリポジトリを作成するには
+\begin{verbatim}
+git clone リモートリポジトリのパス
+\end{verbatim}
+とコマンドを実行します。
+ここで \verb|リモートリポジトリのパス| の指定方法には HTTPS と SSH の二種類がありますが、
+この授業では SSH を用いてアクセスします。
+%HTTPS は事前の設定が必要ありませんが、GitHub で使用するときには\texttt{push/pull} するときに毎回
+%ログイン名とパスワードを求められます。
+GitHub 上のリポジトリのパスはウェブブラウザからリポジトリのページにアクセスすることで調べられます(リポジトリのページにある``Clone or download''と書いてある緑色のボタンを押して``Clone with SSH''を選んでください)。
+例えば\texttt{alg2018/Alogirhtms-Datastructures}の場合はリポジトリのパスは
+\begin{verbatim}
+git@github.com:alg2018/Alogirhtms-Datastructures.git
+\end{verbatim}
+です。なので
+\begin{verbatim}
+git clone git@github.com:alg2018/Alogirhtms-Datastructures.git
+\end{verbatim}
+とすることで GitHub の\texttt{alg2018/Alogirhtms-Datastructures}というリポジトリを clone できます。
+現在のディレクトリの下に \texttt{Alogirhtms-Datastructures} というディレクトリが作成されました。
+これは Git のローカルレポジトリでもあります。
+
+\subsection{ローカルリポジトリの変更をリモートリポジトリに反映する}
+リモートリポジトリに書き込む権限がある場合にはローカルリポジトリの変更をリモートリポジトリに
+反映することができます。
+まずワーキングディレクトリの内容をローカルリポジトリに commit してください。
+%\begin{verbatim}
+%git diff
+%\end{verbatim}
+%としても何も表示されない
+\begin{verbatim}
+git status
+\end{verbatim}
+とコマンドを実行して
+\begin{verbatim}
+nothing to commit, working directory clean
+\end{verbatim}
+と最後の行に表示されていれば大丈夫です。
+このローカルリポジトリに対する commit をリモートリポジトリに反映するには
+\begin{verbatim}
+git push
+\end{verbatim}
+とします。
+もしもリモートリポジトリが更新されている可能性があるのであれば先に次に説明する \texttt{git pull} を実行しておいてください。
+
+\subsection{リモートリポジトリの変更をローカルリポジトリに反映する}
+逆にリモートリポジトリの変更をローカルリポジトリに反映したい状況があります。
+複数人でファイルを更新している場合や一人が大学や自宅など複数の場所でファイルを更新している場合等
+が該当します。
+そのような場合には
+\begin{verbatim}
+git pull
+\end{verbatim}
+とします。
+前回の pull の後にリモートとローカルで同じファイルの同じ箇所が変更されていると、
+変更の衝突を自力で解決する必要があります(今回は説明しません)。
+
+\section{この授業の課題の進め方について}
+この授業では GitHub の Fork という機能と Pull request という機能を使って課題の配布、提出を実現します。
+%当初はこの9月に公開された GitHub の機能 ``Classroom for GitHub''を利用したかったのですが問題があったため利用を見送りました。
+この授業で課題を受け取り提出するまでのワークフローは以下のようになります。
+\begin{enumerate}
+\item ウェブブラウザで GitHub 上の課題のリポジトリ(alg2018 の下のリポジトリ。学生は Read-Only)にアクセスし自分のアカウントに Fork する。
+そのためにウェブブラウザで GitHub 上の課題のリポジトリにアクセスし右上にある Fork と書かれたボタンを押す。
+\item 自分のアカウントに Fork されたリポジトリをローカルに clone する。
+\item ファイルを編集したり追加したりして課題を終らせる。その間には定期的に commit したりその他の Git のコマンドを使用したりする。
+\item GitHub上の Fork によって作成されたリポジトリに push する。単に \texttt{git push} とすればよい。課題を進める途中で push しても構わないが最後には必ず push する。
+\item GitHub上の Fork によって作成されたリポジトリから Fork 元のリポジトリに Pull request を送る。
+そのためにウェブブラウザで Fork によって作成されたリポジトリにアクセスしファイルリストの上の左側にある緑色のボタンを押す。
+そうすると Fork元のリポジトリとの差分が表示される。
+Pull request のタイトルとメッセージを書いて緑色の ``Create pull request'' ボタンを押す。
+タイトルは最後の commit のメッセージが入力されているはずだが好きなものに変更してよい(「課題を提出します」など)。
+メッセージは簡単な感想や質問、課題の中で工夫した点などを書く。
+\item もしも Pull request を送った後にファイルを更新して再提出したい時には自分の一回目の Pull request にコメントでその旨を書く。
+各課題につき Pull request は一人一回とする。
+\end{enumerate}
+%この Fork と Pull request を使った方法の場合、
+学生同士でお互いの GitHub 上のリポジトリや Pull request を見ることができます。
+自分が課題を終えた後に他の人の解法を見てみると、勉強になるかもしれません。
+以下が課題提出の注意点です。
+\begin{enumerate}
+\item Fork してから clone する。元の\texttt{alg2018/レポジトリ名}からclone しない。
+\item 忘れずにワーキングディレクトリの内容をローカルリポジトリに commit する。
+\item その後に忘れずにリモートリポジトリ(Fork で作成されたもの)に push する。
+\item その後に忘れずに GitHub 上で Forkで作成されたリポジトリから Fork元のリポジトリに Pull request を送る。
+\end{enumerate}
+このうち一つでも忘れると正しく課題が提出できないので注意してください。
+課題が提出できたか不安なときは教員、TAに聞いてください。
+
+
+
+\if0
+\section{この授業の課題の進め方について(没になった案)}
+この授業ではつい先月公開された GitHub の機能 ``Classroom for GitHub''を利用して課題の配布/提出を行います。
+課題を受け取り提出するまでのワークフローは以下のようになります。
+\begin{enumerate}
+\item GitHub 上の titech-is-cs115/student の wiki に書かれた課題に対応する URL にアクセスする。
+すると各学生ごとにリポジトリが GitHub の titech-is-cs115 の下にできる(リポジトリ名は \verb|#課題名#-#ユーザー名#| となるはず)。
+\item そのリポジトリをローカルに clone する。
+\item ファイルを編集したり追加したりして課題を終らせる。その間には定期的に commit したりその他の Git のコマンドを使用したりする。
+\item GitHub上のリモートリポジトリに push する (課題を進める途中で push しても構わないが最後には必ず push する)。
+\end{enumerate}
+最後の提出の方法について push の後にもう1ステップを今後追加する可能性があります。
+当面は GitHub上のリポジトリのある時刻のものを提出物としてみなすことにします。
+
+また、\texttt{titech-is-cs115/students} は Git の練習用のリポジトリです。
+学生全員が \texttt{push/pull} することができます。
+自由にファイルを作成してよいので Git を使う練習をしてみてください。
+\fi
+
+
+%\section{sbt と ScalaTest を用いた単体テスト}
+%まず、titech-is-cs115/student の wiki に書かれている URL にアクセスして ``Accept this assignment'' ボタンを押して課題(assignment) に参加してください。
+%titech-is-cs115 の下に \verb|assignment0-アカウント名| というリポジトリができるはずです。
+%そのリポジトリの中に課題の説明のファイル(このpdf)と課題のプログラムの雛形が置かれています。
+
+
+
+\section*{日常での Git の使用}
+Git はとても便利な道具です。Gitに慣れると継続的に編集するようなテキストファイルを全て Git で管理したくなります。
+今後プログラムやレポート、論文(Texファイル) を書く機会が増えてくるかと思いますが、それらを Git で管理しインターネット上の
+リポジトリに保存しておくととても便利です。
+大学でも自宅でも同じファイルにアクセスすることができ編集履歴が全て残ります。
+そのため日常的に Git を使うことをすすめます。ただし GitHub は無料アカウントでプライベートリポジトリを作成できないので
+Bitbucket 等他のリポジトリホスティングサービスを使用した方がよいでしょう。
+
+\end{document}
