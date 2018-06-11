@@ -1,0 +1,153 @@
+\documentclass[a4paper,11pt, article]{memoir}
+
+%\setstocksize{237.8mm}{420.5mm}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\setlrmarginsandblock{20mm}{20mm}{*}
+\setulmarginsandblock{18mm}{30mm}{*}
+\setheadfoot{0mm}{15mm}
+\setheaderspaces{*}{0mm}{*}
+\checkandfixthelayout[fixed]
+%\pagestyle{empty}
+
+\usepackage{xeCJK}
+\usepackage{url}
+\usepackage{hyperref}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setCJKmainfont{Noto Serif CJK JP}
+\setCJKsansfont{Noto Sans CJK JP}
+\setCJKmonofont{Noto Sans Mono CJK JP}
+
+
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{Inconsolata}
+
+\counterwithout{section}{chapter}
+
+%\setsecnumdepth{subsection}
+%\maxsecnumdepth{section}
+
+\usepackage{listings}
+
+\title{GitHubアカウントの作り方}
+\author{森~立平}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent
+目標
+\begin{itemize}
+\item GitHub アカウントを作る。
+\item Google Form で履修者の情報を登録する。
+\end{itemize}
+
+
+\noindent
+ワークフロー
+\begin{enumerate}
+\item GitHub アカウントを作る。
+\item SSH鍵を作る。
+\item SSH鍵を GitHub アカウントに登録する。
+\item Google Form から情報を登録する。
+\end{enumerate}
+
+\section{SSH 鍵の GitHub への登録}
+この授業の課題の配布、提出は GitHubを通じて行います。
+Git から GitHub 上のリポジトリにアクセスする度にパスワードを入力するのは面倒なので SSH 鍵を登録しておきます。
+ここで SSHとは Secure Shell の略で暗号化された通信を実現するための仕組みです。
+まず SSH 鍵を生成するために
+\begin{verbatim}
+ssh-keygen
+\end{verbatim}
+とコマンドを実行します。
+すると
+\begin{verbatim}
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/mori/.ssh/id_rsa): 
+\end{verbatim}
+と鍵ファイルのパスを尋ねられますがデフォルトのままでよいので、そのまま Enter を押します。
+次に
+\begin{verbatim}
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+\end{verbatim}
+とパスフレーズ(鍵を使用するときのパスワード)を尋ねられますが、これは空にしたいので何も入力せずに Enter を押します。
+そうすると
+%\begin{lstlisting}[frame=single]
+%test
+%\end{lstlisting}
+\begin{verbatim}
+Your identification has been saved in /home/mori/.ssh/id_rsa.
+Your public key has been saved in /home/mori/.ssh/id_rsa.pub.
+The key fingerprint is:
+3c:08:1f:10:a4:c1:4e:46:cf:5a:6d:ca:8c:58:ad:2b mori@gmac01.is.titech.ac.jp
+\end{verbatim}
+\begin{verbatim}
+The key's randomart image is:
++--[ RSA 2048]----+
+| oo.+.           |
+|  +* o           |
+| +o * +          |
+| o.B = +         |
+|. + + o S        |
+|   .     .       |
+|E .              |
+| .               |
+|                 |
++-----------------+
+\end{verbatim}
+というように表示されて鍵が生成されます。
+ここで \texttt{id\_rsa} が秘密鍵、\texttt{id\_rsa.pub}が公開鍵です(両方ともテキストファイルです)。
+公開鍵は暗号化に用いられ秘密鍵は復号に用いられます。秘密鍵は他人に知られてはいけません。公開鍵は暗号化された通信を
+するために通信の相手に教える必要があります。公開鍵は第三者に知られても安全です。
+この授業でこれ以上公開鍵暗号の説明はしませんが、「秘密鍵は信用できない者に知られてはいけない」、「公開鍵は誰に知られたとしても安全」
+ということは知っておいてください。
+
+次に公開鍵を GitHub に登録します。
+GitHub にログインして右上にあるアイコンから Settings を選びます。
+左のメニューから SSH keys を選びます。
+そこで Add SSH key を選び、Title  とKey (公開鍵)を入力します。
+Title はなんでもよいです(ひょっとしたら空でもよいかも)。公開鍵として \texttt{id\_rsa.pub} の内容を入力します。
+ホームディレクトリで
+\begin{verbatim}
+cat .ssh/id_rsa.pub
+\end{verbatim}
+とコマンドを実行すると
+\small
+\begin{verbatim}
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/gxywsteOQMka+SQRuSboMkamcKTp16
+s1Kaac6GsdSIhZeJNfn+j/Ei9HOR7kg94ENIon2FHhgAffMtMIno9HZiiE+32ynxBf5trL
+AgvzBnzDTu8PMfz3uxH6Yai5MDVufBlT++A42fwhxQQGcF4rmO77/2LWXSwTijGk7W2ji8
+0OdBvZgmhwQNNg5LPa8x9JsPt4E3LgZPEREaVyxmPJzJFohRXLvMyqBtft3F60Qb7hAnrP
+mUssRGLqxt8ah39HL/nN2t1KXMx3UH2pLMgxvxv/K6hhItX93vQM88YLtL8E+dB14Tp7lk
+DxshNfgaA+qhlWrFgd98OLsvCeEMtb mori@gmac01.is.titech.ac.jp
+\end{verbatim}
+\normalsize
+というようにファイルの中身が表示されます。
+これをコピーアンドペーストで Key のところに入力してください。
+%
+これで GitHub に SSH を通じてアクセスできるようになりました。
+もしも自宅など別の環境から GitHub にアクセスしたい場合には別途 SSH鍵を作成して登録してください(GitHubには複数の公開鍵を登録できます)。
+
+\textbf{[この段落は余談です]} SSH はもともとリモートマシンに暗号化された通信用いて安全にログインするための仕組みです。
+SSH を使えば西7号館の演習室に外からログインすることも可能です。
+設定は演習室で \texttt{\~{}/.ssh/authorized\_keys} というファイルを作成して自宅で使用するSSH鍵の公開鍵を書き込むだけです(\texttt{\~{}/}はホームディレクトリという意味)。
+これで自宅など他の場所から
+\begin{verbatim}
+ssh アカウント名@porto.is.titech.ac.jp
+\end{verbatim}
+で演習室の外部接続用のマシンにログインできるようになります(Windows の場合は何か SSH クライアントをインストールして使う必要があります)。
+このマシンには \texttt{sbt} や \texttt{scala} はインストールされていませんが、
+さらに \texttt{ssh is-kan2} としてアカウントのパスワードを入力すると、演習室と同じ環境のマシンにログインできます。
+ここで使用する秘密鍵は絶対に他人に知られないようにしてください。
+秘密鍵を知られてしまうと演習室のマシンにログインされてしまいます。
+
+
+\section{履修者の情報の登録}
+\url{https://goo.gl/forms/RQBcwibFLArqg3sd2} にアクセスして、学籍番号、氏名、西7演習室ログイン名、GitHubアカウント名を登録してください。
+
+
+\end{document}
