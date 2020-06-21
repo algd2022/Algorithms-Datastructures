@@ -1,5 +1,9 @@
 # アルゴリズムとデータ構造
 
+挨拶
+
+https://www.youtube.com/watch?v=jmIXH0fVbLw
+
 氏名、学籍番号、GitHubアカウント名を登録してください。
 
 https://forms.gle/SueK6pzzjGL1tADE7
