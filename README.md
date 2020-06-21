@@ -1,9 +1,11 @@
 # アルゴリズムとデータ構造
 
-以下から氏名、学籍番号、GitHubアカウント名を登録してください。
+氏名、学籍番号、GitHubアカウント名を登録してください。
+
 https://forms.gle/SueK6pzzjGL1tADE7
 
 Slack のワークスペースに参加してください。
+
 https://join.slack.com/t/ad2020talk/shared_invite/zt-fkd8l9a8-lI9Ib84lDZc3vxl8tlTsWg
 
 Youtube のチャンネル(講義ビデオ等)
