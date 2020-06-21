@@ -8,7 +8,15 @@ Slack のワークスペースに参加してください。
 
 https://join.slack.com/t/ad2020talk/shared_invite/zt-fkd8l9a8-lI9Ib84lDZc3vxl8tlTsWg
 
+演習をする PC が windows の人は以下のリンクの説明に従い WSL をインストールしてください。よっぽど自身がある人以外は WSL2 ではなく WSL1 をインストールしてください。
+Linux ディストリビューションは Ubuntu を選んでください(Ubuntu 20.04 LTS がインストールされるはずです)。
+管理者として PowerShell を実行するにはタスクバーの検索窓に powershell と入力し、「管理者として実行する」を選択してください。
+
+https://docs.microsoft.com/ja-jp/windows/wsl/install-win10
+
 Youtube のチャンネル(講義ビデオ等)
+
+https://www.youtube.com/playlist?list=PLmCVdZFx-Dud48ewN6_37uoG0u6vKP2GZ
 
 [プログラミング演習のルール](/RULES.md) 必ず読んでください
 
