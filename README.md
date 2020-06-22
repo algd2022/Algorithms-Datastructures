@@ -4,7 +4,9 @@
 
 https://www.youtube.com/watch?v=jmIXH0fVbLw
 
-氏名、学籍番号、GitHubアカウント名を登録してください。
+右上の "Sign Up" のボタンからGitHubのアカウントを作ってください。既にアカウントを持っている人はそれを使って構いません。
+
+以下のリンクから氏名、学籍番号、GitHubアカウント名を登録してください。
 
 https://forms.gle/SueK6pzzjGL1tADE7
 
