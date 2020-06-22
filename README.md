@@ -5,7 +5,7 @@ https://www.youtube.com/watch?v=jmIXH0fVbLw
 1. 右上の "Sign Up" のボタンからGitHubのアカウントを作ってください。既にアカウントを持っている人はそれを使って構いません。
 1. 以下のリンクから氏名、学籍番号、GitHubアカウント名を登録してください。
 https://forms.gle/SueK6pzzjGL1tADE7
-1. Slack のワークスペースに参加してください。
+1. Slack のワークスペースに参加してください。本名で参加してください。
 https://join.slack.com/t/ad2020talk/shared_invite/zt-fkd8l9a8-lI9Ib84lDZc3vxl8tlTsWg
 1. 演習をするための PC が windows の人は以下のリンクの説明に従い WSL をインストールしてください。よっぽど自身がある人以外は WSL2 ではなく WSL1 をインストールしてください。
 Linux ディストリビューションは Ubuntu を選んでください(Ubuntu 20.04 LTS がインストールされるはずです)。
