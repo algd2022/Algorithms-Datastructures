@@ -7,7 +7,7 @@ https://www.youtube.com/watch?v=jmIXH0fVbLw
 https://forms.gle/SueK6pzzjGL1tADE7
 1. Slack のワークスペースに参加してください。本名で参加してください。
 https://join.slack.com/t/ad2020talk/shared_invite/zt-fkd8l9a8-lI9Ib84lDZc3vxl8tlTsWg
-1. 演習をするための PC が Windows の人は以下のリンクの説明に従い WSL をインストールしてください。よっぽど自身がある人以外は WSL2 ではなく WSL1 をインストールしてください。
+1. 演習をするための PC が Windows の人は以下のリンクの説明に従い WSL をインストールしてください。よっぽど自信がある人以外は WSL2 ではなく WSL1 をインストールしてください。
 Linux ディストリビューションは Ubuntu を選んでください(Ubuntu 20.04 LTS がインストールされるはずです)。
 管理者として PowerShell を実行するにはタスクバーの検索窓に powershell と入力し、「管理者として実行する」を選択すればいいです。
 https://docs.microsoft.com/ja-jp/windows/wsl/install-win10
