@@ -13,9 +13,7 @@ Linux ディストリビューションは Ubuntu を選んでください(Ubunt
 https://docs.microsoft.com/ja-jp/windows/wsl/install-win10
 1. 演習をするための PC が Mac の人はターミナルから `xcode-select --install` と入力することで`clang`をインストールしてください。
 既にインストール済の場合は
-```
-    xcode-select: error: command line tools are already installed, use "Software Update" to install updates
-```
+```xcode-select: error: command line tools are already installed, use "Software Update" to install updates```
 と表示されると思いますが問題ありません。
 1. Youtube のプレイリスト(講義ビデオ等)
 https://www.youtube.com/playlist?list=PLmCVdZFx-Dud48ewN6_37uoG0u6vKP2GZ
