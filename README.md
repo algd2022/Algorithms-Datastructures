@@ -12,6 +12,11 @@ Linux ディストリビューションは Ubuntu を選んでください(Ubunt
 管理者として PowerShell を実行するにはタスクバーの検索窓に powershell と入力し、「管理者として実行する」を選択すればいいです。
 https://docs.microsoft.com/ja-jp/windows/wsl/install-win10
 1. 演習をするための PC が Mac の人はターミナルから `xcode-select --install` と入力することで`gcc`と`clang`をインストールしてください。
+既にインストール済の場合は
+```
+    xcode-select: error: command line tools are already installed, use "Software Update" to install updates
+```
+と表示されると思いますが問題ありません。
 1. Youtube のプレイリスト(講義ビデオ等)
 https://www.youtube.com/playlist?list=PLmCVdZFx-Dud48ewN6_37uoG0u6vKP2GZ
 
