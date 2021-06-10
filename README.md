@@ -1,7 +1,7 @@
 # アルゴリズムとデータ構造
 
 1. 挨拶
-https://www.youtube.com/watch?v=jmIXH0fVbLw
+https://www.youtube.com/watch?v=J6ZdxQAfgZM
 1. Slack のワークスペースに参加してください。本名で参加してください。
 https://join.slack.com/t/ad2021hq/shared_invite/zt-ri4usp6p-WbAk8Zzp60SYkxtDLe_IiA
 1. 右上の "Sign Up" のボタンからGitHubのアカウントを作ってください。既にアカウントを持っている人はそれを使って構いません。
