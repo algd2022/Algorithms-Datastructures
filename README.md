@@ -16,6 +16,6 @@ Linux ディストリビューションは Ubuntu を選んでください(Ubunt
 ```xcode-select: error: command line tools are already installed, use "Software Update" to install updates```
 と表示されると思いますが問題ありません。
 1. Youtube のプレイリスト(講義ビデオ等)
-https://www.youtube.com/playlist?list=PLmCVdZFx-Dud48ewN6_37uoG0u6vKP2GZ
+https://www.youtube.com/playlist?list=PLmCVdZFx-DueSMGF75qkXVkdUVUhsUvKi
 
 [プログラミング演習のルール](/RULES.md) 必ず読んでください
