@@ -10,7 +10,7 @@ https://forms.gle/18yXSrc8Uu4XPVnH8
 1. 演習をするための PC が Windows の人は以下の説明に従い WSL2 をインストールしてください(参考 https://docs.microsoft.com/ja-jp/windows/wsl/setup/environment )。
 	1. 管理者として PowerShell を実行する(タスクバーの検索窓に powershell と入力し、「管理者として実行する」を選択すればよいです)。
 	1. `wsl --install` と入力し Enter キーを押す。その後コンピューターを再起動する(Linux ディストリビューションは Ubuntu でよいです)。
-	1. インストールされた Ubuntu を実行し、ユーザー名とパスワードを設定してください。
+	1. インストールされた Ubuntu を実行し、ユーザー名とパスワードを設定する。
 1. 演習をするための PC が Mac の人はターミナルから `xcode-select --install` と入力することで`clang`をインストールしてください。
 既にインストール済の場合は
 ```xcode-select: error: command line tools are already installed, use "Software Update" to install updates```
