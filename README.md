@@ -8,8 +8,8 @@ https://join.slack.com/t/algd2022/shared_invite/zt-1anhaf60j-45H_nTX4OXt0mgUByls
 1. 以下のリンクから氏名、学籍番号、GitHubアカウント名を登録してください。
 https://forms.gle/y8Hy9u4ac8wdwEyt9
 1. 演習をするための PC が Windows の人は以下のリンクの説明に従い WSL2 をインストールしてください。
-  1. 管理者として PowerShell を実行する(タスクバーの検索窓に powershell と入力し、「管理者として実行する」を選択すればよい)。
-  1. `wsl --install` と入力し Enter キーを押す。
+	1. 管理者として PowerShell を実行する(タスクバーの検索窓に powershell と入力し、「管理者として実行する」を選択すればよい)。
+	1. `wsl --install` と入力し Enter キーを押す。
 参考
 https://docs.microsoft.com/ja-jp/windows/wsl/install
 Linux ディストリビューションは Ubuntu を選んでください。
